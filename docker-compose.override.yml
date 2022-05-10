@@ -1,0 +1,21 @@
+version: '3.4'
+
+services:
+  umbracoten:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_URLS=https://+:443;http://+:80
+    ports:
+      - "80"
+      - "443"
+    build:
+      target: base
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/root/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/root/.aspnet/https:ro
+      - ./UmbracoTen/bin/Debug/net6.0:/app
+      - ./UmbracoTen/App_Plugins:/app/App_Plugins
+      - ./UmbracoTen/umbraco:/app/umbraco
+      - ./UmbracoTen/wwwroot:/app/wwwroot
+      - ./UmbracoTen/wwwroot/media:/app/wwwroot/media
+    entrypoint: ["dotnet", "/app/UmbracoTen.dll"]

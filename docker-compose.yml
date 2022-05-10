@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  umbracoten:
+    image: ${DOCKER_REGISTRY-}umbracoten
+    build:
+      context: .
+      dockerfile: UmbracoTen/Dockerfile
